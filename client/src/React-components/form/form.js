@@ -1,13 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import useStyles from "./styles";
 import { TextField, Button, Typography, Paper, } from "@material-ui/core";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createRecipe } from "../../actions/recipes.js";
+import { useDispatch, useSelector } from "react-redux";
+import { createRecipe, updateRecipe } from "../../actions/recipes.js";
 
-
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
     const [recipeData, setRecipeData] = useState({
         creator: '', 
         title: '', 
@@ -35,19 +34,41 @@ const Form = () => {
             description: '',
           },*/
 
-    
+    const recipe = useSelector((state)=> currentId ? state.recipes.find((r)=>r._id ===currentId) :null)
     const classes = useStyles();
     const dispatch = useDispatch();
+    useEffect(()=>{
+      if(recipe)setRecipeData(recipe);
+    },
+    [recipe])
     const handleSubmit = (e)=>{
       e.preventDefault();
 
-      dispatch(createRecipe(recipeData));
+      if(currentId){
+        dispatch(updateRecipe(currentId, recipeData));
+       
+      }
+      else{
+        dispatch(createRecipe(recipeData));
+        
+      }
+      clear();
     };
-    const clear = ()=>{};
+    const clear = ()=>{
+      setCurrentId(null);
+      setRecipeData({
+        creator: '', 
+        title: '', 
+        time: '',
+        servings: 0,
+        summary: '',
+        selectedFile:'',
+      })
+    };
 
     return(
         <Paper className={classes.paper}>
-          <Typography variant="h6"> Upload A Recipe</Typography>
+          <Typography variant="h6">{currentId ? 'Edit':'Upload'} A Recipe</Typography>
 
             
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
@@ -98,6 +119,7 @@ const Form = () => {
                 fullWidth
                 value={recipeData.summary}
                 onChange={(e)=> setRecipeData({...recipeData, summary: e.target.value})}
+                inputProps={{ maxLength: 200 }}
                 />
 
                 <div className={classes.fileInput}>

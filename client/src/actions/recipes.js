@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { FETCH_ALL, CREATE, /*UPDATE, DELETE, LIKE*/ } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
 //Action creators
 
@@ -27,4 +27,29 @@ export const createRecipe =(recipe)=> async (dispatch)=>{
     }
 }
 
+export const updateRecipe =(id,recipe)=> async(dispatch)=>{
+    try {
+       const {data} = await api.updateRecipe(id,recipe);
+       dispatch({ type:UPDATE, payload:data });
+    } catch (error) {
+        console.log(error);
+    }
+}
 
+export const deleteRecipe = (id)=> async(dispatch)=>{
+    try {
+        await api.deleteRecipe(id);
+        dispatch({ type:DELETE, payload:id });
+     } catch (error) {
+         console.log(error);
+     }
+}
+
+export const likeRecipe =(id,recipe)=> async(dispatch)=>{
+    try {
+       const {data} = await api.likeRecipe(id);
+       dispatch({ type:LIKE, payload:data });
+    } catch (error) {
+        console.log(error);
+    }
+}

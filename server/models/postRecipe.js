@@ -7,6 +7,15 @@ const postRecipeSchema = mongoose.Schema ({
     servings: String,
     summary: String,
     selectedFile: String,
+    createdAt:{
+      type: Date,
+      default: new Date()
+  },
+
+  likeCount:{
+    type:Number,
+    default: 0,
+  }
 
     /*pictures: [
       {
@@ -32,10 +41,7 @@ const postRecipeSchema = mongoose.Schema ({
       description: String,
     },
 
-    createdAt:{
-        type: Date,
-        default: new Date()
-    },*/
+    ,*/
 
   });
 
