@@ -7,7 +7,9 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from "moment";
 import { useDispatch } from "react-redux";
 
+
 import { deleteRecipe, likeRecipe } from "../../../actions/recipes.js";
+import Steps from "../../steps/steps.js";
 
 const Recipe = ({recipe, setCurrentId}) => {
     const classes = useStyles();
@@ -15,7 +17,7 @@ const Recipe = ({recipe, setCurrentId}) => {
 
     return(
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={recipe.selectedFile} title={recipe.title} />
+            <CardMedia className={classes.media} image={recipe.selectedFile} title={recipe.title}/>
             <div className={classes.overlay}>
                 <Typography variant="h6">{recipe.creator}</Typography>
                 <Typography variant="h6">{moment(recipe.createdAt).fromNow()}</Typography>
@@ -27,12 +29,21 @@ const Recipe = ({recipe, setCurrentId}) => {
                     <MoreHorizIcon fontSize="default"/>
                 </Button>
             </div>
-            <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary">Recipes Steps?</Typography>
-            </div>
+
             <Typography className={classes.title} variant="h5" gutterBottom>
                     {recipe.title}
-                </Typography>
+            </Typography>
+            
+            
+            {/*
+            <div className={classes.details}>
+                <Typography variant="body2" color="textSecondary">
+                    {recipe.tips.map((tip)=> <li>{tip}</li>)}
+                    </Typography>
+            </div>*/}
+
+
+            
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     {recipe.summary}

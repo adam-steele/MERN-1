@@ -1,42 +1,29 @@
-import React, {useState,useEffect} from "react";
+import React from "react";
 
-import { Container, AppBar, Typography, Grid, Grow } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { Container } from "@material-ui/core";
 
-import { getRecipes } from "./actions/recipes.js";
-//import me from "./images/me.jpg";
-import Recipes from "./React-components/recipes/recipes.js";
-import Form from "./React-components/form/form.js";
-import useStyles from "./styles";
+import {  BrowserRouter, Switch, Route} from "react-router-dom";
+
+
+
+import NavBar from "./React-components/app-bar/app-bar.js"
+
+import Home from "./React-components/Home/home.js";
+import Auth from "./React-components/Auth/Auth.js";
 
 
 const App = ()=>{
-    const [currentId, setCurrentId] = useState(null);
-    const classes = useStyles();
-    const dispatch = useDispatch();
-
-    useEffect(()=>{
-       dispatch(getRecipes());
-    },[currentId,dispatch]);
-
+   
     return (
+        <BrowserRouter>
         <Container maxWidth="lg">
-            <AppBar className={classes.appBar} position ="static" color="inherit">
-                <Typography className={classes.heading} variant="h2" align="center">Adam's Recipe App</Typography>
-            </AppBar>
-            <Grow in>
-                <Container id="main">
-                    <Grid container className={classes.mainContainer} justify="space-between" alignItems="stretch" spacing={3}>
-                        <Grid item xs={12} sm={7} >
-                            <Recipes setCurrentId={setCurrentId} />
-                        </Grid>
-                        <Grid item xs={12} sm={4} >
-                            <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Grow>
+            <NavBar />
+            <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/auth" exact component={Auth} />
+            </Switch>
         </Container>
+        </BrowserRouter>
     );
 };
 

@@ -1,13 +1,35 @@
 import axios from "axios";
 
-const url = 'http://localhost:5000/recipes'
+const API = axios.create( {baseURL: 'http://localhost:5000'})
 
-export const fetchRecipes = () => axios.get(url);
+/*API.interceptors.request.use((req)=>{
+    if(localStorage.getItem('profile')){
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    };
 
-export const createRecipe =(newRecipe)=> axios.post(url, newRecipe);
+    return req;
+})*/
 
-export const updateRecipe = (id, updatedrecipe)=>axios.patch(`${url}/${id}`, updatedrecipe);
 
-export const deleteRecipe = (id)=> axios.delete(`${url}/${id}`, deleteRecipe);
+API.interceptors.request.use((req) => {
+    console.log(localStorage.getItem('profile'))
+    if (localStorage.getItem('profile')) {
+      req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+  
+    return req;
+  });
 
-export const likeRecipe = (id, updatedrecipe)=>axios.patch(`${url}/${id}/likeRecipe`, updatedrecipe);
+export const fetchRecipes = () => API.get('/recipes');
+
+export const createRecipe =(newRecipe)=> API.post('/recipes', newRecipe);
+
+export const updateRecipe = (id, updatedrecipe)=>API.patch(`/recipes/${id}`, updatedrecipe);
+
+export const deleteRecipe = (id)=> API.delete(`/recipes/${id}`, deleteRecipe);
+
+export const likeRecipe = (id, updatedrecipe)=>API.patch(`/recipes/${id}/likeRecipe`, updatedrecipe);
+
+export const signIn = (FormData) => API.post('/user/signin', FormData);
+
+export const signUp = (FormData) => API.post('/user/signup', FormData);

@@ -59,6 +59,7 @@ export const deleteRecipe = async(req,res)=>{
 export const likeRecipe = async(req,res)=>{
     const {id} = req.params;
     
+    if(!req.userId) return res.json({message:"Unathenticated"})
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         res.status(404).send("No post with that id");
@@ -66,6 +67,14 @@ export const likeRecipe = async(req,res)=>{
 
     const recipe = await PostRecipe.findById(id);
 
-    const updatedRecipe = await PostRecipe.findByIdAndUpdate(id, {likeCount: recipe.likeCount + 1},{new:true})
+    const  index = recipe.likes.findIndex((id)=> id === String(req.userId));
+
+    if (index === -1){
+        recipe.likes.push(userId);
+    } else {
+        recipe.likes.filter((id)=> id !== String(req.userId))
+    }
+
+    const updatedRecipe = await PostRecipe.findByIdAndUpdate(id, recipe ,{new:true})
     res.json(updatedRecipe);
 }

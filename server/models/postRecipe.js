@@ -12,17 +12,17 @@ const postRecipeSchema = mongoose.Schema ({
       default: new Date()
   },
 
-  likeCount:{
-    type:Number,
-    default: 0,
-  }
+  likes:{
+    type:[String],
+    default: [],
+  },
 
     /*pictures: [
       {
         selectedFile: String,
         caption: String,
       }
-    ],
+    ], */
 
     ingreds: [
       {
@@ -30,18 +30,17 @@ const postRecipeSchema = mongoose.Schema ({
         amount: Number,
         unit: String,
       },
-    ],
+    ], 
 
     tips: [String],
 
     steps: [String],
 
-    source: {
+    /*source: {
       link: String,
       description: String,
-    },
+    },*/
 
-    ,*/
 
   });
 

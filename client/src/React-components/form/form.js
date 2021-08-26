@@ -5,6 +5,7 @@ import { TextField, Button, Typography, Paper, } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createRecipe, updateRecipe } from "../../actions/recipes.js";
+import Steps from "../steps/steps.js";
 
 const Form = ({currentId, setCurrentId}) => {
     const [recipeData, setRecipeData] = useState({
@@ -13,7 +14,10 @@ const Form = ({currentId, setCurrentId}) => {
         time: '',
         servings: 0,
         summary: '',
+        tips: '',
+        steps: '',
         selectedFile:'',
+
       })
             
           /*
@@ -23,13 +27,8 @@ const Form = ({currentId, setCurrentId}) => {
               amount: 0 ,
               unit: '',
             },
-          ],
-      
-          tips: [],
-      
-          steps: [],
-      
-          source: {
+          ], 
+          /* source: {
             link: '',
             description: '',
           },*/
@@ -62,8 +61,12 @@ const Form = ({currentId, setCurrentId}) => {
         time: '',
         servings: 0,
         summary: '',
+        tips: '',
+        steps: '',
         selectedFile:'',
       })
+
+      
     };
 
     return(
@@ -115,13 +118,47 @@ const Form = ({currentId, setCurrentId}) => {
                 variant="outlined" 
                 label="Summary" 
                 multiline
-                rows={4}
+                rows={3}
                 fullWidth
                 value={recipeData.summary}
                 onChange={(e)=> setRecipeData({...recipeData, summary: e.target.value})}
                 inputProps={{ maxLength: 200 }}
                 />
 
+               <TextField 
+               name="tips" 
+               variant="outlined"
+               label="Tips (comma separated)" 
+               fullWidth 
+               multiline
+               rows={3}
+               value={recipeData.tips} 
+               onChange={(e) => setRecipeData({ ...recipeData, tips: e.target.value.split(',') })} />
+
+              {/*<TextField 
+                name="ingreds-amount" 
+                variant="outlined" 
+                label="Time" 
+                fullWidth
+                value={recipeData.ingreds.amount}
+                onChange={(e)=> setRecipeData({...recipeData, time: e.target.value})}
+              />*/}
+
+
+              <TextField 
+               name="steps" 
+               variant="outlined"
+               label="Steps (comma separated)" 
+               fullWidth 
+               multiline
+               rows={6}
+               value={recipeData.steps} 
+               onChange={(e) => setRecipeData({ ...recipeData, steps: e.target.value.split(',') })} />
+              
+
+              {Steps()}
+
+              
                 <div className={classes.fileInput}>
                     <FileBase 
                         type="file"
