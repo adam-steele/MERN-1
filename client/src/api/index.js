@@ -30,6 +30,6 @@ export const deleteRecipe = (id)=> API.delete(`/recipes/${id}`, deleteRecipe);
 
 export const likeRecipe = (id, updatedrecipe)=>API.patch(`/recipes/${id}/likeRecipe`, updatedrecipe);
 
-export const signIn = (FormData) => API.post('/user/signin', FormData);
+export const signIn = (FormData) => API.post('/users/signin', FormData);
 
-export const signUp = (FormData) => API.post('/user/signup', FormData);
+export const signUp = (FormData) => API.post('/users/signup', FormData);
