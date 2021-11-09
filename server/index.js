@@ -17,7 +17,7 @@ app.use(express.urlencoded({limit: "30mb", extended:true}));
 
 
 app.use('/recipes', recipeRoutes);
-app.use('/user', userRoutes);
+//app.use('/user', userRoutes);
 
 
 
