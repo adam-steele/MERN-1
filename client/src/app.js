@@ -9,7 +9,7 @@ import {  BrowserRouter, Switch, Route} from "react-router-dom";
 import NavBar from "./React-components/app-bar/app-bar.js"
 
 import Home from "./React-components/Home/home.js";
-import Auth from "./React-components/Auth/Auth";
+import Auth from "./React-components/Auth/Auth.js";
 
 
 const App = ()=>{
