@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 
 import useStyles from "./styles";
 import { TextField, Button, Typography, Paper, } from "@material-ui/core";
-import FileBase from "react-file-base64";
+//import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createRecipe, updateRecipe } from "../../actions/recipes.js";
 import Steps from "../steps/steps.js";
@@ -160,12 +160,13 @@ const Form = ({currentId, setCurrentId}) => {
 
               
                 <div className={classes.fileInput}>
-                    <FileBase 
+                    {/*<FileBase 
                         type="file"
                         multiple={false}
                         fullWidth
                         onDone={({base64})=>setRecipeData({...recipeData, selectedFile: base64})}
-                /></div>
+                    />*/}
+                </div>
                     <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
                     <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
                     
