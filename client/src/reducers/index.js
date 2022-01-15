@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import recipes from './recipes.js';
-//import auth from "./auth";
+import auth from "./auth";
 
 
-export default combineReducers({ recipes });
+export default combineReducers({ recipes, auth });
 
 //import { recipeReducer } from "./recipes.js";
 

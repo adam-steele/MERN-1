@@ -9,7 +9,7 @@ import {  BrowserRouter, Switch, Route} from "react-router-dom";
 import NavBar from "./React-components/app-bar/app-bar.js"
 
 import Home from "./React-components/Home/home.js";
-//import Auth from "./React-components/Auth/Auth.js";
+import Auth from "./React-components/Auth/Auth.js";
 
 
 const App = ()=>{
@@ -20,7 +20,7 @@ const App = ()=>{
             <NavBar />
             <Switch>
                 <Route path="/" exact component={Home} />
-                {/*<Route path="/auth" exact component={Auth} />*/}
+                <Route path="/auth" exact component={Auth} />
             </Switch>
         </Container>
         </BrowserRouter>

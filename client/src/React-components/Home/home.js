@@ -1,7 +1,7 @@
 
 import React, {useState,useEffect} from "react";
 
-import { Container, AppBar, Typography, Grid, Grow, } from "@material-ui/core";
+import { Container, /*AppBar, Typography,*/ Grid, Grow, } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import { getRecipes } from "../../actions/recipes.js";
