@@ -112,6 +112,7 @@ export default Auth; */
 
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { Avatar, Button, Paper, Container,Grid,Typography, TextField } from "@material-ui/core";
 import { GoogleLogin } from "react-google-login";
@@ -128,6 +129,7 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignUp] = useState(false);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleShowPassword = () => setShowPassword((prevShowPassword)=> !prevShowPassword);
 
@@ -142,7 +144,8 @@ const Auth = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({type:'AUTH', data:{result, token}})
+            dispatch({type:'AUTH', data:{result, token}});
+            history.push('/');
             
         } catch (error) {
             console.log(error)
