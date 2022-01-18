@@ -121,13 +121,15 @@ import Icon from "./Icon.js";
 import LockOutlinedIcon  from "@material-ui/icons/LockOutlined";
 import useStyles from './styles'
 import Input from "./input";
+import { signin, signup } from "../../actions/auth";
 
-
+const intialState = {firstName : '', lastName: '', email: '', password: '', confirmPassword:''}
 
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignUp] = useState(false);
+    const [ formData, setFormData] = useState(intialState) ;
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -159,12 +161,21 @@ const Auth = () => {
     };
 
 
-    const handleSubmit = ()=>{
+    const handleSubmit = (e)=>{
+        e.preventDefault();
 
+        if(isSignup){
+            dispatch(signup(formData,history));
+        }
+        else{
+            dispatch(signin(formData,history));
+        }
+
+        console.log(formData);
     };
 
-    const handleChange = ()=>{
-
+    const handleChange = (e)=>{
+        setFormData({...formData,[e.target.name]:[e.target.value]})
     };
 
    return (
@@ -179,7 +190,7 @@ const Auth = () => {
                         {isSignup && (
                             <>
                             <Input name="firstName" label= "First Name" handleChange={handleChange} autoFocus half/>
-                            <Input name="LastName" label= "Last Name" handleChange={handleChange} half/>
+                            <Input name="lastName" label= "Last Name" handleChange={handleChange} half/>
                             </>
                         )}
                         <Input name="email" label="Email Address" handleChange={handleChange} type="email" />

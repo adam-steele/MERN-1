@@ -1,10 +1,10 @@
 import express from 'express';
-//import bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
 import recipeRoutes from "./routes/recipes.js";
-//import userRoutes from "./routes/users.js";
+import userRoutes from "./routes/users.js";
 import dotenv from "dotenv";
 
 
@@ -17,7 +17,7 @@ app.use(express.urlencoded({limit: "30mb", extended:true}));
 
 
 app.use('/recipes', recipeRoutes);
-//app.use('/user', userRoutes);
+app.use('/user', userRoutes);
 
 
 
